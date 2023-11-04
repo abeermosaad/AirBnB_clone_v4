@@ -1,12 +1,14 @@
-$(document).ready(function(){
-  var checkboxes = $(":checkbox");
-  var my_list = [] ;
-  console.log(checkboxes)
-  $.each(checkboxes, function(i, checkboxe) {
-    if(checkboxe.is(':checked')){
-        my_list.push($(this).prop('data-id'))
-    }
-    console.log(checkboxe)
-})
-console.log(my_list)
+$(document).ready(function () {
+  const checkboxes = $(':checkbox');
+  const dict = {};
+  $.each(checkboxes, function (i, checkboxe) {
+    $(checkboxe).on('change', function () {
+      if ($(this).is(':checked')) {
+        dict[$(this).data('id')] = $(this).data('name');
+      } else {
+        delete dict[$(this).data('id')];
+      }
+      $('.amenities h4').text(Object.values(dict));
+    });
+  });
 });
